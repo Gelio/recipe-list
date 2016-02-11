@@ -29,32 +29,43 @@ export default class RecipePage extends React.Component {
     }
 
     beginEditingRecipe() {
-        console.log('editing');
         this.setState({
             editing: true
         });
     }
 
     deleteRecipe() {
-        console.log('deleting');
-        // Call api to delete
-        // Redirect to the main page
+        RecipeAPI.deleteRecipeByID(this.state.recipeID);
+        this.props.history.push('/');
     }
 
-    saveRecipe(newRecipe) {
+    saveRecipe() {
+        // Delete empty ingredients
+        var parsedRecipe = this.state.recipe;
+        parsedRecipe.ingredients = parsedRecipe.ingredients.filter((ingredient) => {
+            return (ingredient && ingredient.length > 0);
+        });
 
+        if(parsedRecipe.name.length === 0) {
+            // Name needs to be passed in
+            return;
+        }
+
+        RecipeAPI.saveRecipeByID(this.state.recipeID, parsedRecipe);
+        this.setState({
+            editing: false
+        });
     }
 
     acceptChanges(newRecipe) {
-        console.log('new state', newRecipe);
         this.setState({
             recipe: newRecipe
         });
-        console.log(this.state);
     }
 
     discardChanges() {
         // Load recipe back (call component did mount actually)
+        this.componentDidMount();
     }
 
     render() {
