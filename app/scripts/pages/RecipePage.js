@@ -20,11 +20,12 @@ export default class RecipePage extends React.Component {
     componentDidMount() {
         const recipeID = this.props.params.recipeID,
             recipe = RecipeAPI.getRecipeByID(recipeID);
+        console.log(this.props.location);
 
         this.setState({
             recipeID: recipeID,
             recipe: recipe,
-            editing: false
+            editing: this.props.location.query.editing !== undefined ? true : false
         });
     }
 
