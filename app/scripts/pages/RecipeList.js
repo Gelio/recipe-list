@@ -4,7 +4,6 @@ import RecipeAPI from '../utilities/recipeAPI';
 
 export default class RecipeList extends React.Component {
     render() {
-        console.log(RecipeAPI.getRecipesList());
         return (
             <div class="container">
                 <h2>Recipe list</h2>

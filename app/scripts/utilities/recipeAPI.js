@@ -7,7 +7,7 @@ export default {
 var defaultRecipeList = [
     {
         name: 'Chocolate',
-        ingredients: 'just chocolate'
+        ingredients: ['just chocolate']
     }
 ];
 
